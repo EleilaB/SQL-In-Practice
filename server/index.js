@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const {SERVER_PORT} = process.env
-const {seed} = require('./seed.js')
+const {seed} = require('./controller.js')
 const {
     getAllClients,
     getPendingAppointments,
@@ -16,9 +16,6 @@ const {
 
 app.use(express.json())
 app.use(cors())
-
-// DEV
-app.post('/seed', seed)
 
 // USERS
 app.get('/clients', getAllClients)
