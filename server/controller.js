@@ -18,6 +18,11 @@ module.exports = {
         JOIN cc_users u
         ON c.user_id = u.user_id;`).then(dbRes => res.status(200).send(dbRes[0]))
     },
+    getPendingAppointments: (req, res) => {
+        sequelize.query(`SELECT * FROM cc_appointments a
+        WHERE approved=false
+        ORDER BY date DESC;`).then(dbRes => res.status(200).send(dbRes[0]))
+    },
     getUpcomingAppointments: (req, res) => {
         sequelize.query(`select a.appt_id, a.date, a.service_type, a.approved, a.completed, u.first_name, u.last_name 
         from cc_appointments a
